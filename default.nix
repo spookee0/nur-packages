@@ -12,5 +12,6 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   at32-work-bench = pkgs.libsForQt5.callPackage ./pkgs/at32-work-bench {};
+  elf-size-analyze = pkgs.python3Packages.callPackage ./pkgs/elf-size-analyze {};
   # ...
 }
