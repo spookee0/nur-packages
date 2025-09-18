@@ -12,6 +12,7 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          config.allowBroken = true;
         };
       });
     packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
