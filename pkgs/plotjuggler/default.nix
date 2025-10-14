@@ -20,6 +20,7 @@
   arrow,
   qtimageformats,
   qtdeclarative,
+  qtx11extras,
   xorg,
 }: let
   data-tamer-src = fetchFromGitHub {
@@ -130,6 +131,7 @@ in
       qtwebsockets
       qtimageformats
       qtdeclarative
+      qtx11extras
 
       zeromq
       sqlite
@@ -149,7 +151,7 @@ in
       libdwarf
       arrow
       mosquitto
-      protobuf
+      # protobuf
     ];
 
     meta = {
