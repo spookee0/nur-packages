@@ -13,6 +13,8 @@
 
   at32-work-bench = pkgs.libsForQt5.callPackage ./pkgs/at32-work-bench {};
   elf-size-analyze = pkgs.python3Packages.callPackage ./pkgs/elf-size-analyze {};
-  plotjuggler = pkgs.libsForQt5.callPackage ./pkgs/plotjuggler {};
+  # plotjuggler = pkgs.libsForQt5.callPackage ./pkgs/plotjuggler {};
+  throne = pkgs.qt6Packages.callPackage ./pkgs/throne {};
+  # yukon = pkgs.python3Packages.callPackage ./pkgs/yukon {};
   # ...
 }
