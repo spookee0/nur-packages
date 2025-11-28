@@ -4,7 +4,8 @@
   autoPatchelfHook,
   lib,
   unzip,
-  libsForQt5,
+  qtbase,
+  qscintilla,
   wrapQtAppsHook,
 }:
 stdenv.mkDerivation rec {
@@ -23,8 +24,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [autoPatchelfHook unzip wrapQtAppsHook];
   buildInputs = [
     stdenv.cc.cc.lib
-    libsForQt5.qtbase
-    libsForQt5.qscintilla
+    qtbase
+    qscintilla
   ];
   unpackPhase = ''
     runHook preUnpack
@@ -33,7 +34,7 @@ stdenv.mkDerivation rec {
     tar xf data.tar.xz
     cd usr/local/AT32_Work_Bench
     rm *.so* AT32_Work_Bench.sh copylib.sh
-    rm -rf platforms
+    # rm -rf platforms
     cd ../../..
     runHook postUnpack
   '';
