@@ -69,7 +69,7 @@ stdenv.mkDerivation rec {
       -DVSP_USE_SYSTEM_DELABELLA=false \
       -DVSP_USE_SYSTEM_EIGEN=true \
       -DVSP_USE_SYSTEM_EXPRPARSE=false \
-      -DVSP_USE_SYSTEM_FLTK=true \
+      -DVSP_USE_SYSTEM_FLTK=false \
       -DVSP_USE_SYSTEM_GLEW=true \
       -DVSP_USE_SYSTEM_GLM=true \
       -DVSP_USE_SYSTEM_LIBIGES=false \
