@@ -28,4 +28,5 @@ in {
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     inherit cmake-3_27;
   };
+  throne = pkgs.qt6Packages.callPackage ./pkgs/throne {};
 }
