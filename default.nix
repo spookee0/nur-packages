@@ -9,14 +9,14 @@
   # Pin nixpkgs to a revision that has cmake 3.24.3
   # This commit is from around the time when cmake 3.24.3 was current
   # (before it was updated to 3.25.2 in nixpkgs) [[1]]
-  pkgsWithCmake3_27 =
+  pkgsWithCmake3_24 =
     import (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/cc9458e2b9a56c085a34e3b648300e46a87e94a3.tar.gz";
-      sha256 = "0zflafb2srlpjrrw5qi2xhk1d1nx7akvaj3qdjcxqpxvh48xgskx";
+      url = "https://github.com/NixOS/nixpkgs/archive/edd361904bce01c258b5bef7a85d94cda9952f3a.tar.gz";
+      sha256 = "03bw2pbjbvsgfwa6sqw7yxs7042r6gs4p74zzl3xlgz3zizha52p";
     }) {
       system = pkgs.stdenv.hostPlatform.system;
     };
-  cmake-3_27 = pkgsWithCmake3_27.cmake;
+  cmake-3_24 = pkgsWithCmake3_24.cmake;
 in {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib {inherit pkgs;}; # functions
@@ -26,7 +26,7 @@ in {
   at32-work-bench = pkgs.libsForQt5.callPackage ./pkgs/at32-work-bench {};
   elf-size-analyze = pkgs.python3Packages.callPackage ./pkgs/elf-size-analyze {};
   openvsp = pkgs.callPackage ./pkgs/openvsp {
-    inherit cmake-3_27;
+    cmake-3_24 = cmake-3_24;
   };
   throne = pkgs.qt6Packages.callPackage ./pkgs/throne {};
 }

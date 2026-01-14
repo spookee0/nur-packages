@@ -1,11 +1,12 @@
 {
   stdenv,
+  gcc14,
   fetchFromGitHub,
   git,
   lib,
   unzip,
   # installed by developer
-  cmake-3_27,
+  cmake-3_24,
   swig,
   python3,
   doxygen,
@@ -33,7 +34,8 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    cmake-3_27
+    gcc14
+    cmake-3_24
     python3
     git
     cpptest
@@ -81,7 +83,7 @@ stdenv.mkDerivation rec {
       $src/Libraries \
       -DCMAKE_BUILD_TYPE=Release \
 
-    make -j$cores
+    make -j1
     popd
 
     pushd build
