@@ -28,5 +28,4 @@ in {
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     cmake-3_24 = cmake-3_24;
   };
-  throne = pkgs.qt6Packages.callPackage ./pkgs/throne {};
 }
