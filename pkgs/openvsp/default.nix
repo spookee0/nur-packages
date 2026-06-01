@@ -5,10 +5,12 @@
   git,
   lib,
   unzip,
+  makeWrapper,
   # installed by developer
   cmake-3_24,
   swig,
   python3,
+  python314Packages,
   doxygen,
   graphviz,
   # bundled, but system libs are ok
@@ -17,20 +19,22 @@
   cminpack,
   cpptest,
   eigen,
-  fltk14,
+  fltk_1_4,
   glew,
   glm,
-  # libxml2, # does not compile for some reason
+  # libxml2,
+  pkg-config,
+  wayland-scanner,
 }:
 stdenv.mkDerivation rec {
   pname = "openvsp";
-  version = "3.46.0";
+  version = "3.50.4";
 
   src = fetchFromGitHub {
     owner = "OpenVSP";
     repo = "OpenVSP";
     rev = "OpenVSP_${version}";
-    hash = "sha256-zSjWSM5+2tYM5uHssR/ECtJcnwkF/rxsj7obmRpIyu4=";
+    hash = "sha256-exwKC0H2odhQStW/W9/7vkoYQefkt6h1dvM3zpT49w8=";
   };
 
   nativeBuildInputs = [
@@ -40,6 +44,10 @@ stdenv.mkDerivation rec {
     git
     cpptest
     unzip
+    pkg-config
+    wayland-scanner
+    python314Packages.numpy
+    makeWrapper
   ];
 
   # swig & doxygen are not included as the build would fail since it tries to call
@@ -53,12 +61,11 @@ stdenv.mkDerivation rec {
     clipper2
     cminpack
     eigen
-    fltk14
+    fltk_1_4
     glew
     glm
     # libxml2
   ];
-
   configurePhase = ''
     mkdir -p build buildlibs
     pushd buildlibs
@@ -71,7 +78,7 @@ stdenv.mkDerivation rec {
       -DVSP_USE_SYSTEM_DELABELLA=false \
       -DVSP_USE_SYSTEM_EIGEN=true \
       -DVSP_USE_SYSTEM_EXPRPARSE=false \
-      -DVSP_USE_SYSTEM_FLTK=false \
+      -DVSP_USE_SYSTEM_FLTK=true \
       -DVSP_USE_SYSTEM_GLEW=true \
       -DVSP_USE_SYSTEM_GLM=true \
       -DVSP_USE_SYSTEM_LIBIGES=false \
@@ -83,7 +90,7 @@ stdenv.mkDerivation rec {
       $src/Libraries \
       -DCMAKE_BUILD_TYPE=Release \
 
-    make -j1
+    make -j$cores
     popd
 
     pushd build
@@ -104,6 +111,12 @@ stdenv.mkDerivation rec {
     unzip "OpenVSP-${version}-Linux.zip"
     cp -r "OpenVSP-${version}-Linux"/* $out/bin
     popd
+
+    # FLTK 1.4 Wayland backend is experimental and segfaults with
+    # "Fatal error no 1 in Wayland protocol: xdg_toplevel".
+    # Force the stable X11 backend by default; users can override
+    # with FLTK_BACKEND=wayland if desired.
+    wrapProgram $out/bin/vsp --set FLTK_BACKEND x11
   '';
 
   meta = {
