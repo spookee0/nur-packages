@@ -25,6 +25,7 @@ in {
 
   at32-work-bench = pkgs.libsForQt5.callPackage ./pkgs/at32-work-bench {};
   elf-size-analyze = pkgs.python3Packages.callPackage ./pkgs/elf-size-analyze {};
+  openocd-at32 = pkgs.callPackage ./pkgs/openocd-at32 {};
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     cmake-3_24 = cmake-3_24;
   };
