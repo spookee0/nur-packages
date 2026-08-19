@@ -17,6 +17,15 @@
       system = pkgs.stdenv.hostPlatform.system;
     };
   cmake-3_24 = pkgsWithCmake3_24.cmake;
+  # Both jsbsim derivations share this single source fetch, pinned to v1.3.1.
+  # Nix deduplicates identical fixed-output derivations, so passing it to both
+  # packages means the tarball is fetched (and stored) exactly once.
+  jsbsim-src = pkgs.fetchFromGitHub {
+    owner = "JSBSim-Team";
+    repo = "jsbsim";
+    rev = "v1.3.1";
+    hash = "sha256-CkjMB9j+1LoS6cQoTMHCeuylsYImKgds4RO5sjjId0g=";
+  };
 in {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib {inherit pkgs;}; # functions
@@ -25,6 +34,12 @@ in {
 
   at32-work-bench = pkgs.libsForQt5.callPackage ./pkgs/at32-work-bench {};
   elf-size-analyze = pkgs.python3Packages.callPackage ./pkgs/elf-size-analyze {};
+  jsbsim = pkgs.callPackage ./pkgs/jsbsim {
+    src = jsbsim-src;
+  };
+  jsbsim-python = pkgs.python3Packages.callPackage ./pkgs/jsbsim-python {
+    src = jsbsim-src;
+  };
   openocd-at32 = pkgs.callPackage ./pkgs/openocd-at32 {};
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     cmake-3_24 = cmake-3_24;
