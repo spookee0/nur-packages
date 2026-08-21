@@ -2,13 +2,36 @@
 
 **My personal [NUR](https://github.com/nix-community/NUR) repository**
 
-<!-- Remove this if you don't use github actions -->
-![Build and populate cache](https://github.com/spookee0/nur-packages/workflows/Build%20and%20populate%20cache/badge.svg)
+## Packages
 
-<!--
-Uncomment this if you use travis:
+| Package | Description | Notes |
+| --- | --- | --- |
+| `at32-work-bench` | AT32 MCU graphical config tool (generates init C code) | unfree; `x86_64-linux` only |
+| `elf-size-analyze` | Analyze and visualize ELF binary section/symbol sizes | Python |
+| `jsbsim` | Multi-platform object-oriented flight dynamics model (C++ CLI) | bundles `aircraft`/`engine`/`systems` data |
+| `openocd-at32` | OpenOCD with ArteryTek AT32 support | `linux` only |
+| `openvsp` | Parametric aircraft geometry tool | needs cmake 3.24.3 (pinned) + gcc 14 (`overrideCC`, gcc 15 breaks vendored libs) |
 
-[![Build Status](https://travis-ci.com/<YOUR_TRAVIS_USERNAME>/nur-packages.svg?branch=master)](https://travis-ci.com/<YOUR_TRAVIS_USERNAME>/nur-packages)
--->
-<!-- [![Cachix Cache](https://img.shields.io/badge/cachix-<YOUR_CACHIX_CACHE_NAME>-blue.svg)](https://<YOUR_CACHIX_CACHE_NAME>.cachix.org) -->
+## Usage
 
+As a flake input:
+
+```nix
+inputs.nur.url = "github:spookee0/nur-packages";
+
+# then, e.g. in home.packages / environment.systemPackages:
+inputs.nur.packages.${pkgs.stdenv.hostPlatform.system}.openvsp
+```
+
+As an overlay (adds every package to `pkgs`):
+
+```nix
+nixpkgs.overlays = [ (import (inputs.nur + "/overlay.nix")) ];
+# then just: pkgs.openvsp
+```
+
+Non-flake (`nix-build`):
+
+```bash
+nix-build -A openvsp
+```
