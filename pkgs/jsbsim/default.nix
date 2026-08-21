@@ -51,5 +51,6 @@ stdenv.mkDerivation (finalAttrs: {
     license = licenses.lgpl21Plus;
     mainProgram = "jsbsim";
     platforms = platforms.unix;
+    maintainers = with maintainers; [spookee];
   };
 })

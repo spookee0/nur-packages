@@ -17,9 +17,9 @@
       system = pkgs.stdenv.hostPlatform.system;
     };
   cmake-3_24 = pkgsWithCmake3_24.cmake;
-  # Both jsbsim derivations share this single source fetch, pinned to v1.3.1.
-  # Nix deduplicates identical fixed-output derivations, so passing it to both
-  # packages means the tarball is fetched (and stored) exactly once.
+  # Single source fetch for the jsbsim derivation, pinned to v1.3.1.
+  # Nix deduplicates identical fixed-output derivations, so the tarball is
+  # fetched (and stored) exactly once.
   jsbsim-src = pkgs.fetchFromGitHub {
     owner = "JSBSim-Team";
     repo = "jsbsim";
@@ -37,11 +37,12 @@ in {
   jsbsim = pkgs.callPackage ./pkgs/jsbsim {
     src = jsbsim-src;
   };
-  jsbsim-python = pkgs.python3Packages.callPackage ./pkgs/jsbsim-python {
-    src = jsbsim-src;
-  };
   openocd-at32 = pkgs.callPackage ./pkgs/openocd-at32 {};
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     cmake-3_24 = cmake-3_24;
+    # OpenVSP vendors old third-party libs (STEPCODE/schema_scanner) that
+    # fail to build with the gcc 15 stdenv. gcc 14 builds OpenVSP itself
+    # yet stays lenient enough for the vendored code.
+    stdenv = pkgs.overrideCC pkgs.stdenv pkgs.gcc14;
   };
 }
