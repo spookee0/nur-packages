@@ -1,6 +1,5 @@
 {
   stdenv,
-  gcc14,
   fetchFromGitHub,
   git,
   lib,
@@ -8,11 +7,8 @@
   makeWrapper,
   # installed by developer
   cmake-3_24,
-  swig,
   python3,
   python314Packages,
-  doxygen,
-  graphviz,
   # bundled, but system libs are ok
   # angelscript, # needs additional packages
   clipper2,
@@ -38,7 +34,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    gcc14
     cmake-3_24
     python3
     git
@@ -50,13 +45,10 @@ stdenv.mkDerivation rec {
     makeWrapper
   ];
 
-  # swig & doxygen are not included as the build would fail since it tries to call
-  # "swig -doxygen" which fails Make as this is not a valid command.
-  # Seems like an upstream problem.
+  # swig & doxygen are excluded on purpose: OpenVSP's build tries to run
+  # `swig -doxygen`, which is not a valid command and fails the build.
+  # graphviz is only pulled in by that doxygen docs step, so it goes too.
   buildInputs = [
-    swig
-    doxygen
-    graphviz
     # angelscript
     clipper2
     cminpack
@@ -90,7 +82,7 @@ stdenv.mkDerivation rec {
       $src/Libraries \
       -DCMAKE_BUILD_TYPE=Release \
 
-    make -j$cores
+    make -j$NIX_BUILD_CORES
     popd
 
     pushd build
@@ -100,7 +92,7 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     pushd build
-    make -j$cores
+    make -j$NIX_BUILD_CORES
     make package
     popd
   '';
@@ -125,5 +117,6 @@ stdenv.mkDerivation rec {
     license = lib.licenses.nasa13;
     maintainers = with lib.maintainers; [kekschen];
     mainProgram = "vsp";
+    platforms = lib.platforms.linux;
   };
 }
