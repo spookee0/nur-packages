@@ -2,7 +2,6 @@
   lib,
   buildPythonPackage,
   fetchPypi,
-  stdenv,
   setuptools,
   setuptools-git-versioning,
 }:
@@ -13,16 +12,19 @@ buildPythonPackage rec {
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "arS83cau3PLk1uECwmKUnlts7zy69nrS4Vz02kazCtI=";
+    hash = "sha256-arS83cau3PLk1uECwmKUnlts7zy69nrS4Vz02kazCtI=";
   };
 
   nativeBuildInputs = [
-    stdenv.cc.cc.lib
     setuptools
     setuptools-git-versioning
   ];
 
   meta = with lib; {
+    description = "Analyze and visualize ELF binary section and symbol sizes";
+    homepage = "https://pypi.org/project/elf-size-analyze/";
     license = licenses.free;
+    maintainers = with maintainers; [spookee];
+    platforms = platforms.unix;
   };
 }
