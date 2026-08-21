@@ -60,8 +60,10 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "OpenOCD with ArteryTek AT32 support";
+    homepage = "https://github.com/ArteryTek/openocd";
     mainProgram = "openocd";
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
+    maintainers = with maintainers; [spookee];
   };
 }
