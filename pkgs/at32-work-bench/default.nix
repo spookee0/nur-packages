@@ -10,14 +10,14 @@
 }:
 stdenv.mkDerivation rec {
   pname = "at32-work-bench";
-  version = "1.2.04";
+  version = "1.2.05";
   arch = "x86_64";
   src =
     if stdenv.hostPlatform.system == "x86_64-linux"
     then
       fetchurl {
         url = "https://www.arterytek.com/download/TOOL/AT32_Work_Bench_Linux-${arch}_V${version}.zip";
-        sha256 = "sha256-cA9fr0lHWKuSf/lKdfOV1jd19ixp00D3A7VkYmjneT8=";
+        sha256 = "sha256-FSN7YeGu2gw2ew+Q82GvqmhvtlElJD5dhNz0XRxKTW0=";
       }
     else throw "AT32-Workbench is not supported on ${stdenv.hostPlatform.system}";
 

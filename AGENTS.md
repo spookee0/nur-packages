@@ -31,7 +31,7 @@ pattern, suggest an update to AGENTS.md
 This repo is part of the `infra` metarepo. All domain docs (glossary,
 architecture, ADRs, feature specs) live at the infra level:
 
-- **Context map**: `../CONTEXT-MAP.md` (infra root)
+- **Context map**: `../CONTEXT.md` (infra root)
 - **Nur context**: `../docs/contexts/nur/CONTEXT.md` (packages, overlays, ADRs)
 - **ADRs**: `../docs/adr/` (system-wide) + `../docs/contexts/nur/adr/` (nur-specific)
 
