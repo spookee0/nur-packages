@@ -45,4 +45,5 @@ in {
     # yet stays lenient enough for the vendored code.
     stdenv = pkgs.overrideCC pkgs.stdenv pkgs.gcc14;
   };
+  rea = pkgs.callPackage ./pkgs/rea {};
 }

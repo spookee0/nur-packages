@@ -61,6 +61,7 @@ nur/
 | `jsbsim` | Flight dynamics model (C++ CLI) |
 | `openocd-at32` | OpenOCD with ArteryTek AT32 support |
 | `openvsp` | Parametric aircraft geometry tool |
+| `rea` | REA reverse-engineering CLI and MCP server |
 
 ### Build
 

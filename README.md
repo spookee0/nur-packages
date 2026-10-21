@@ -11,6 +11,7 @@
 | `jsbsim` | Multi-platform object-oriented flight dynamics model (C++ CLI) | bundles `aircraft`/`engine`/`systems` data |
 | `openocd-at32` | OpenOCD with ArteryTek AT32 support | `linux` only |
 | `openvsp` | Parametric aircraft geometry tool | needs cmake 3.24.3 (pinned) + gcc 14 (`overrideCC`, gcc 15 breaks vendored libs) |
+| `rea` | REA reverse-engineering CLI and MCP server | pinned npm artifact; `x86_64-linux` only; Frida binding unbuilt |
 
 ## Usage
 
@@ -21,6 +22,7 @@ inputs.nur.url = "github:spookee0/nur-packages";
 
 # then, e.g. in home.packages / environment.systemPackages:
 inputs.nur.packages.${pkgs.stdenv.hostPlatform.system}.openvsp
+inputs.nur.packages.${pkgs.stdenv.hostPlatform.system}.rea
 ```
 
 As an overlay (adds every package to `pkgs`):
