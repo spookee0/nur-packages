@@ -56,6 +56,7 @@ nur/
 
 | Package | Description |
 | --- | --- |
+| `agnix` | Linter for AI coding assistant configuration |
 | `at32-work-bench` | AT32 MCU graphical config tool |
 | `elf-size-analyze` | Analyze ELF binary section/symbol sizes |
 | `jsbsim` | Flight dynamics model (C++ CLI) |

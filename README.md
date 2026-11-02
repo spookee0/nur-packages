@@ -6,6 +6,7 @@
 
 | Package | Description | Notes |
 | --- | --- | --- |
+| `agnix` | Linter for AI coding assistant configuration (`AGENTS.md`, `SKILL.md`, hooks, MCP) | Rust; the CLI only, the LSP and WASM crates are not built |
 | `at32-work-bench` | AT32 MCU graphical config tool (generates init C code) | unfree; `x86_64-linux` only |
 | `elf-size-analyze` | Analyze and visualize ELF binary section/symbol sizes | Python |
 | `jsbsim` | Multi-platform object-oriented flight dynamics model (C++ CLI) | bundles `aircraft`/`engine`/`systems` data |
