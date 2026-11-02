@@ -4,6 +4,7 @@
 {
   lib,
   rustPlatform,
+  rustc,
   fetchFromGitHub,
 }:
 
@@ -38,6 +39,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
     description = "Linter and LSP for AI coding assistant configuration files";
     homepage = "https://github.com/agent-sh/agnix";
     license = with lib.licenses; [mit asl20];
+    # The workspace is edition 2024 and requires rustc 1.91. The 25.05 leg of
+    # the CI matrix carries an older toolchain, where the package is broken
+    # rather than a failed build.
+    broken = lib.versionOlder rustc.version "1.91";
     mainProgram = "agnix";
     sourceProvenance = [lib.sourceTypes.fromSource];
   };
