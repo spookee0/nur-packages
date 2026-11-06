@@ -38,6 +38,7 @@ in {
   jsbsim = pkgs.callPackage ./pkgs/jsbsim {
     src = jsbsim-src;
   };
+  mautrix-telegram = pkgs.callPackage ./pkgs/mautrix-telegram {};
   openocd-at32 = pkgs.callPackage ./pkgs/openocd-at32 {};
   openvsp = pkgs.callPackage ./pkgs/openvsp {
     cmake-3_24 = cmake-3_24;
