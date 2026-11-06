@@ -60,6 +60,7 @@ nur/
 | `at32-work-bench` | AT32 MCU graphical config tool |
 | `elf-size-analyze` | Analyze ELF binary section/symbol sizes |
 | `jsbsim` | Flight dynamics model (C++ CLI) |
+| `mautrix-telegram` | Matrix-Telegram puppeting bridge (Go/bridgev2) |
 | `openocd-at32` | OpenOCD with ArteryTek AT32 support |
 | `openvsp` | Parametric aircraft geometry tool |
 | `rea` | REA reverse-engineering CLI and MCP server |

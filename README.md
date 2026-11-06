@@ -10,6 +10,7 @@
 | `at32-work-bench` | AT32 MCU graphical config tool (generates init C code) | unfree; `x86_64-linux` only |
 | `elf-size-analyze` | Analyze and visualize ELF binary section/symbol sizes | Python |
 | `jsbsim` | Multi-platform object-oriented flight dynamics model (C++ CLI) | bundles `aircraft`/`engine`/`systems` data |
+| `mautrix-telegram` | Matrix-Telegram puppeting bridge (Go/bridgev2) | upstream tag pinned; uses mautrix-go's pure Go `goolm`, not deprecated libolm |
 | `openocd-at32` | OpenOCD with ArteryTek AT32 support | `linux` only |
 | `openvsp` | Parametric aircraft geometry tool | needs cmake 3.24.3 (pinned) + gcc 14 (`overrideCC`, gcc 15 breaks vendored libs) |
 | `rea` | REA reverse-engineering CLI and MCP server | pinned npm artifact; `x86_64-linux` only; Frida binding unbuilt |
